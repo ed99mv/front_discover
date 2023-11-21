@@ -6,10 +6,8 @@ import TourGallery from "../../TourGallery/TourGallery";
 const HomePage = () => {
   return (
     <>
-      <header>
-        <Header />
-      </header>
-   <br />
+
+ 
         <br />
         <br />
         <br />
@@ -18,11 +16,7 @@ const HomePage = () => {
         </body>
         <br />
         <br />
-      
 
-      <footer>
-        <Footer />
-      </footer>
     </>
   );
 };

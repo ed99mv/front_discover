@@ -134,3 +134,11 @@
     border-radius: 8px;
   }
   
+  /* Estilo para quitar la línea azul del enlace */
+.card-link {
+  text-decoration: none;
+  color: inherit; /* Esto mantiene el color del texto predeterminado */
+}
+
+/* Opcional: Estilo para cambiar el color del enlace al pasar el cursor por encima */
+
