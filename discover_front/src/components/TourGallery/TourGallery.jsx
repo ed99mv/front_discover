@@ -52,6 +52,7 @@ const TourGallery = () => {
             const galleriesData = await galleriesResponse.json();
 
             const photoPaths = galleriesData.map((gallery) => gallery.photo_path);
+            const photoData = galleriesData.map((gallery) => gallery.photo_);
 
             // Fetch para obtener información de compañías asociadas a cada tour
             const companiesResponse = await fetch(`http://localhost:3001/api/v1/tours/${tour.id}/companies`);

@@ -1,74 +1,70 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import './NewTourForm.css';
 
 const NewTourForm = () => {
   const [tourData, setTourData] = useState({
     name: '',
     description: '',
-    price: 0,
-    gallery_ids: [],
+    price: '',
+    ubication: '', // Agregar ubication al estado
   });
 
-  const [galleries, setGalleries] = useState([]);
-
-  useEffect(() => {
-    const fetchGalleries = async () => {
-      try {
-        const response = await fetch('http://localhost3001/api/v1/galleries');
-        if (!response.ok) {
-          throw new Error('Error al obtener las galerías');
-        }
-        const galleriesData = await response.json();
-        setGalleries(galleriesData);
-      } catch (error) {
-        console.error('Error fetching galleries:', error);
-      }
-    };
-
-    fetchGalleries();
-  }, []);
+  const [selectedImages, setSelectedImages] = useState([]);
 
   const handleInputChange = event => {
     const { name, value } = event.target;
     setTourData({ ...tourData, [name]: value });
   };
 
-  const handleCheckboxChange = event => {
-    const { checked, value } = event.target;
-    let updatedGalleryIds = [...tourData.gallery_ids];
-    if (checked) {
-      updatedGalleryIds.push(Number(value));
-    } else {
-      updatedGalleryIds = updatedGalleryIds.filter(id => id !== Number(value));
-    }
-    setTourData({ ...tourData, gallery_ids: updatedGalleryIds });
+  const handleImageChange = event => {
+    const files = Array.from(event.target.files);
+    setSelectedImages(files);
   };
 
   const handleSubmit = async event => {
     event.preventDefault();
+
     try {
-      const response = await fetch('http://localhost3001/api/v1/tours', {
+      const tourResponse = await fetch('http://localhost:3001/api/v1/tours', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ tour: tourData }),
+        body: JSON.stringify(tourData),
       });
 
-      if (!response.ok) {
+      if (!tourResponse.ok) {
         throw new Error('Error al crear el tour');
       }
 
-      const responseData = await response.json();
-      console.log('Tour creado exitosamente:', responseData);
-      // Aquí podrías redirigir a otra página o manejar la respuesta de otra manera
+      const createdTour = await tourResponse.json();
+
+      const imagesFormData = new FormData();
+
+    selectedImages.forEach(image => {
+      imagesFormData.append('gallery[photo_data]', image); // Cambio aquí: quita los corchetes y los corchetes vacíos []
+    });
+
+      const imageResponse = await fetch(`http://localhost:3001/api/v1/tours/${createdTour.id}/galleries`, {
+        method: 'POST',
+        body: imagesFormData,
+      });
+
+      if (!imageResponse.ok) {
+        throw new Error('Error al asociar las imágenes con el tour');
+      }
+
+      const imageData = await imageResponse.json();
+      console.log('Imágenes asociadas al tour:', imageData);
+      // Puedes redirigir a otra página o manejar la respuesta de otra manera
 
     } catch (error) {
-      console.error('Error al crear el tour:', error);
+      console.error('Error al crear el tour o asociar las imágenes:', error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="tour-form" onSubmit={handleSubmit}>
       <label>
         Name:
         <input type="text" name="name" value={tourData.name} onChange={handleInputChange} />
@@ -78,20 +74,17 @@ const NewTourForm = () => {
         <textarea name="description" value={tourData.description} onChange={handleInputChange} />
       </label>
       <label>
+        Ubication:
+        <textarea name="ubication" value={tourData.ubication} onChange={handleInputChange} />
+      </label>
+      <label>
         Price:
         <input type="number" name="price" value={tourData.price} onChange={handleInputChange} />
       </label>
-      {galleries.map(gallery => (
-        <div key={gallery.id}>
-          <input
-            type="checkbox"
-            name="gallery_ids"
-            value={gallery.id}
-            onChange={handleCheckboxChange}
-          />
-          <span>{gallery.photo_path}</span> {/* Asegúrate de mostrar la imagen */}
-        </div>
-      ))}
+      <label>
+        Images:
+        <input type="file" multiple onChange={handleImageChange} />
+      </label>
       <button type="submit">Crear Tour</button>
     </form>
   );
