@@ -6,8 +6,6 @@ import Loading from "../loading/Loading";
 const TourDetails = () => {
   const { id } = useParams();
   const [tourDetails, setTourDetails] = useState(null);
-  const [tourImages, setTourImages] = useState([]);
-  const [companyName, setCompanyName] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
 
   const openImage = (image) => {
@@ -28,25 +26,9 @@ const TourDetails = () => {
           throw new Error("Network response was not ok.");
         }
         const tourData = await response.json();
+        console.log(tourData);
         setTourDetails(tourData);
 
-        const companyResponse = await fetch(
-          `http://localhost:3001/api/v1/tours/${id}/company_id`
-        );
-        if (!companyResponse.ok) {
-          throw new Error("Network response was not ok.");
-        }
-        const companyData = await companyResponse.json();
-        setCompanyName(companyData.name);
-
-        const imagesResponse = await fetch(
-          `http://localhost:3001/api/v1/tours/${id}/galleries`
-        );
-        if (!imagesResponse.ok) {
-          throw new Error("Network response was not ok.");
-        }
-        const imagesData = await imagesResponse.json();
-        setTourImages(imagesData);
       } catch (error) {
         console.error("Error fetching tour details:", error);
       }
@@ -56,18 +38,18 @@ const TourDetails = () => {
   }, [id]);
 
   if (!tourDetails) {
-    return (	<Loading/>	);
+    return <Loading />;
   }
 
   return (
     <div className="tour-details-container">
       <div className="image-gallery">
-        {tourImages.map((image, index) => (
+        {tourDetails.images.map((image, index) => (
           <img
             key={index}
-            src={image.photo_path}
+            src={image} // Asumiendo que el controlador proporciona las URLs de las imágenes
             alt={`Image ${index}`}
-            onClick={() => openImage(image)}
+            onClick={() => openImage({ photo_path: image })} // Crear un objeto similar para manejar la apertura de la imagen
           />
         ))}
       </div>
@@ -75,7 +57,7 @@ const TourDetails = () => {
       <div className="tour-details-content">
         <div className="header">
           <h2>{tourDetails.name}</h2>
-          <p>{companyName}</p>
+          <p>{tourDetails.companyName}</p>
           <p className="location">📍 {tourDetails.ubication}</p>
           <p className="price">₡ {tourDetails.price} por persona</p>
         </div>

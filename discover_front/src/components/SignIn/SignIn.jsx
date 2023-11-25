@@ -69,8 +69,9 @@ const SignIn = () => {
 
       // Guardar el token de autenticación en localStorage
       const authorizationToken = response.headers.get("Authorization");
+      console.log(authorizationToken);
+      localStorage.setItem('token', authorizationToken);
       login(authorizationToken);
-
       console.log("Inicio de sesión exitoso");
       // console.log("Token de autorización:", authorizationToken);
 

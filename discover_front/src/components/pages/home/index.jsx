@@ -11,9 +11,9 @@ const HomePage = () => {
         <br />
         <br />
         <br />
-        <body>
+        
           <TourGallery />
-        </body>
+        
         <br />
         <br />
 

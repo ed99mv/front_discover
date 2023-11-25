@@ -9,10 +9,6 @@ import {
   Input,
   Label,
 } from "reactstrap";
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap/dist/css/bootstrap.css";
-// import PlacesAutocomplete from 'react-places-autocomplete'; // Modificado: Importa PlacesAutocomplete directamente
-// import "bootstrap/dist/css/bootstrap.css";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
