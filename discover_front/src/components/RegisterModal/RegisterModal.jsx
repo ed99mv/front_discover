@@ -170,7 +170,6 @@ class RegisterModal extends Component {
           </FormGroup>
           <FormGroup>
             <Label for="country">País</Label>
-            {/* Modificado: Usar PlacesAutocomplete directamente */}
             <PlacesAutocomplete
               value={this.state.address}
               onChange={this.handleChange}

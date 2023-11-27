@@ -20,7 +20,10 @@ const TourCard = ({ tour }) => {
       <div className="tour-details">
         <h2 className="tour-name">{tour.name}</h2>
         <p>📍 {tour.ubication}</p>
-        {/* <p>🚤 {tour.companies.map(company => company.name).join(', ')}</p> */}
+        <p>
+          Agente de viaje:{" "}
+          <strong>{tour.company ? tour.company.name : "No Seleccionaste una compañía"}</strong>
+        </p>{" "}
         <p>
           <strong>₡ {tour.price}</strong> por persona
         </p>

@@ -12,7 +12,20 @@ const TourGallery = () => {
           throw new Error('Network response was not ok.');
         }
         const toursData = await response.json();
-        setTours(toursData);
+        
+        // Obtener detalles de compañía para cada tour
+        const toursWithCompanyDetails = await Promise.all(
+          toursData.map(async (tour) => {
+            const companyResponse = await fetch(`http://localhost:3001/api/v1/tours/${tour.id}/company_id`);
+            if (!companyResponse.ok) {
+              throw new Error('Failed to fetch company details.');
+            }
+            const companyData = await companyResponse.json();
+            return { ...tour, company: companyData };
+          })
+        );
+
+        setTours(toursWithCompanyDetails);
       } catch (error) {
         console.error('Error fetching tours:', error);
       }

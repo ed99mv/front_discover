@@ -7,6 +7,7 @@ const TourDetails = () => {
   const { id } = useParams();
   const [tourDetails, setTourDetails] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [companyName, setCompanyName] = useState('');
 
   const openImage = (image) => {
     setSelectedImage(image);
@@ -19,21 +20,25 @@ const TourDetails = () => {
   useEffect(() => {
     const fetchTourDetails = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:3001/api/v1/tours/${id}`
-        );
+        const response = await fetch(`http://localhost:3001/api/v1/tours/${id}`);
         if (!response.ok) {
           throw new Error("Network response was not ok.");
         }
         const tourData = await response.json();
-        console.log(tourData);
         setTourDetails(tourData);
-
+  
+        // Obtener detalles de la compañía por su ID
+        const companyResponse = await fetch(`http://localhost:3001/api/v1/tours/${id}/company_id`);
+        if (!companyResponse.ok) {
+          throw new Error('Failed to fetch company name.');
+        }
+        const companyData = await companyResponse.json();
+        setCompanyName(companyData.name);
       } catch (error) {
         console.error("Error fetching tour details:", error);
       }
     };
-
+  
     fetchTourDetails();
   }, [id]);
 
@@ -57,7 +62,7 @@ const TourDetails = () => {
       <div className="tour-details-content">
         <div className="header">
           <h2>{tourDetails.name}</h2>
-          <p>{tourDetails.companyName}</p>
+          <p>{companyName}</p> 
           <p className="location">📍 {tourDetails.ubication}</p>
           <p className="price">₡ {tourDetails.price} por persona</p>
         </div>
