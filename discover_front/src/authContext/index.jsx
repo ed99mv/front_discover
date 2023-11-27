@@ -1,38 +1,44 @@
-// AuthContext.js
 import React, { createContext, useState, useEffect } from 'react';
+import {jwtDecode} from 'jwt-decode';
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const storedToken = localStorage.getItem('token');
+  const [isLoggedIn, setIsLoggedIn] = useState(!!storedToken);
+  const [authToken, setAuthToken] = useState(storedToken || '');
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
-    // Verificar si el usuario está autenticado al cargar la aplicación
-    const token = localStorage.getItem('token');
-    if (token) {
-      // Realizar verificaciones adicionales del token si es necesario
-      setIsLoggedIn(true);
+    if (authToken) {
+      const decoded = jwtDecode(authToken);
+      const userIdFromToken = decoded.sub;
+      setUserId(userIdFromToken);
     }
-  }, []);
+  }, [authToken]);
 
-  const login = (token) => {
-    console.log("token recibido", token);
+  const setAuthData = (token) => {
     localStorage.setItem('token', token);
+    console.log(token);
     setIsLoggedIn(true);
+    setAuthToken(token);
   };
 
-  const logout = (token) => {
-    console.log("token recibido", token)
-    localStorage.removeItem('token', token);
+  const logout = () => {
+    localStorage.removeItem('token');
     setIsLoggedIn(false);
+    setAuthToken('');
+    setUserId(null);
   };
 
   return (
     <AuthContext.Provider
       value={{
         isLoggedIn,
-        login,
+        login: setAuthData,
         logout,
+        authToken,
+        userId,
       }}
     >
       {children}
@@ -41,4 +47,3 @@ const AuthProvider = ({ children }) => {
 };
 
 export { AuthContext, AuthProvider };
-

@@ -9,10 +9,6 @@ import {
   Input,
   Label,
 } from "reactstrap";
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap/dist/css/bootstrap.css";
-// import PlacesAutocomplete from 'react-places-autocomplete'; // Modificado: Importa PlacesAutocomplete directamente
-// import "bootstrap/dist/css/bootstrap.css";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
@@ -174,7 +170,6 @@ class RegisterModal extends Component {
           </FormGroup>
           <FormGroup>
             <Label for="country">País</Label>
-            {/* Modificado: Usar PlacesAutocomplete directamente */}
             <PlacesAutocomplete
               value={this.state.address}
               onChange={this.handleChange}

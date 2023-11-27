@@ -4,6 +4,7 @@ import HomePage from "../components/pages/home";
 import AboutPage from "../components/pages/about";
 import TermsPage from "../components/pages/terms";
 import AssistancePage from "../components/pages/assistance";
+import DetailsPage from "../components/pages/tour_details";
 
 const AppRouter = () => {
   return (
@@ -14,6 +15,7 @@ const AppRouter = () => {
         <Route path="/aboutpage" element={<AboutPage />} />
         <Route path="/termspage" element={<TermsPage />} />
         <Route path="/assistancepage" element={<AssistancePage />} />
+        <Route path="/tour-details/:id" element={<DetailsPage />} />
         {/* <Route path="/homepage/DetailsPage/:travelId" element={<DetailsPage/>} />
       <Route path="AddFomrPage" element={<AddFormPage />} /> */}
       </Route>

@@ -1,0 +1,50 @@
+.main-header {
+  
+    background-color: #f8f8f8; /* Color de fondo del encabezado */
+    padding: 20px;
+    border-bottom: 1px solid #ddd; /* Borde inferior del encabezado */
+  }
+  
+  .custom-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #333; /* Color del texto del encabezado */
+  }
+  
+  .custom-search-box {
+    display: flex;
+    align-items: center;
+  }
+  
+  input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    width: 300px;
+  }
+  
+  button {
+    background-color: #007bff; /* Color del botón de búsqueda */
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3; /* Cambio de color al pasar el cursor sobre el botón */
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: lightseagreen;
+  }

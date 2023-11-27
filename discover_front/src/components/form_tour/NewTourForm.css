@@ -1,0 +1,50 @@
+/* NewTourForm.css */
+
+/* Estilos para el modal */
+.modal-content {
+  border-radius: 10px; /* Bordes redondeados */
+}
+
+.modal-header {
+  background-color: #f0f0f0; /* Color de fondo del encabezado */
+  color: #333; /* Color del texto del encabezado */
+  border-bottom: none; /* Eliminar borde inferior */
+}
+
+.modal-body {
+  padding: 20px; /* Espaciado interno del cuerpo */
+}
+
+.modal-footer {
+  justify-content: space-between; /* Distribuir botones alrededor */
+  border-top: none; /* Eliminar borde superior */
+}
+
+/* Estilos para los campos del formulario */
+.tour-form input[type="text"],
+.tour-form input[type="number"],
+.tour-form textarea,
+.tour-form select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.tour-form select {
+  cursor: pointer;
+}
+
+.tour-form button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #fff;
+  background-color: #007bff; /* Color del botón */
+}
+
+.tour-form button:hover {
+  background-color: #0056b3; /* Color del botón al pasar el ratón */
+}

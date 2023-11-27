@@ -1,0 +1,171 @@
+/* TourCard.css */
+
+/* Estilo base para las tarjetas */
+.tour-card {
+    width: calc(25% - 20px); /* Ancho para mostrar 4 tarjetas por fila */
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+    margin-bottom: 20px;
+  }
+  
+  .tour-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .carousel-container {
+    width: 100%;
+    height: 300px;
+  }
+  
+  .image-slide {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .image-slide img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+  
+  .card-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .tour-details {
+    padding: 20px;
+  }
+  
+  .tour-name {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+  }
+  
+  .tour-details p {
+    margin-bottom: 8px;
+    font-size: 1em;
+  }
+  
+  .tour-details p strong {
+    font-weight: bold;
+  }
+  
+  .card-link::after {
+    content: "Ver detalles";
+    display: block;
+    text-align: center;
+    background-color: #008489;
+    color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .card-link:hover::after {
+    background-color: #005e63;
+  }
+  
+  /* Contenedor flex para las tarjetas */
+  .tour-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  
+  /* TourCard.css */
+
+/* Estilo base para las tarjetas */
+.tour-card {
+    width: calc(25% - 20px); /* Ancho para mostrar 4 tarjetas por fila */
+    margin-bottom: 20px;
+    display: inline-block; /* Muestra las tarjetas en línea */
+    box-sizing: border-box;
+  }
+  
+  /* Resto de los estilos para la tarjeta (imagen, detalles, etc.) permanecen igual */
+  
+  /* Contenedor para las tarjetas */
+  .tour-card-container {
+    font-size: 0; /* Elimina el espacio entre las tarjetas */
+    width: 100%;
+  }
+  
+  /* Limpiar el espaciado residual */
+  .tour-card-container:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  /* TourCard.css */
+
+/* Estilo base para las tarjetas */
+.tour-card {
+    width: calc(25% - 20px); /* Ancho para mostrar 4 tarjetas por fila */
+    margin-bottom: 20px;
+    display: inline-block; /* Muestra las tarjetas en línea */
+    box-sizing: border-box;
+    margin-right: 20px; /* Espacio entre las tarjetas */
+    vertical-align: top; /* Alinea las tarjetas en la parte superior */
+  }
+  
+  /* Resto de los estilos para la tarjeta (imagen, detalles, etc.) permanecen igual */
+  
+  /* Contenedor para las tarjetas */
+  .tour-card-container {
+    font-size: 0; /* Elimina el espacio entre las tarjetas */
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centra las tarjetas horizontalmente */
+    margin: 0 auto; /* Centra el contenedor en la página */
+    max-width: 1200px; /* Ajusta el ancho máximo del contenedor */
+  }
+  
+  /* Limpiar el espaciado residual */
+  .tour-card-container:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  /* TourCard.css */
+
+/* Estilo base para las tarjetas */
+.tour-card {
+    width: calc(25% - 20px); /* Ancho para mostrar 4 tarjetas por fila */
+    margin-bottom: 20px;
+    display: inline-block; /* Muestra las tarjetas en línea */
+    box-sizing: border-box;
+    margin-right: 20px; /* Espacio entre las tarjetas */
+    vertical-align: top; /* Alinea las tarjetas en la parte superior */
+  }
+  
+  /* Resto de los estilos para la tarjeta (imagen, detalles, etc.) permanecen igual */
+  
+  /* Contenedor para las tarjetas */
+  .tour-card-container {
+    font-size: 0; /* Elimina el espacio entre las tarjetas */
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centra las tarjetas horizontalmente */
+    margin: 0 auto; /* Centra el contenedor en la página */
+    max-width: 1200px; /* Ajusta el ancho máximo del contenedor */
+  }
+  
+  /* Media query para dispositivos móviles */
+  @media screen and (max-width: 768px) {
+    .tour-card {
+      width: calc(50% - 20px); /* Ancho para mostrar 2 tarjetas por fila en móvil */
+      margin-right: 0; /* Elimina el margen entre tarjetas */
+    }
+  }
+  
