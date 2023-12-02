@@ -13,7 +13,7 @@ const TourGallery = () => {
         }
         const toursData = await response.json();
         
-        // Obtener detalles de compañía para cada tour
+        // Obtener el nombre de compañía para cada tour
         const toursWithCompanyDetails = await Promise.all(
           toursData.map(async (tour) => {
             const companyResponse = await fetch(`http://localhost:3001/api/v1/tours/${tour.id}/company_id`);

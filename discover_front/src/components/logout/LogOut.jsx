@@ -18,7 +18,7 @@ const LogOut = () => {
         if (!response.ok) {
             console.log(response.headers.get("Authorization"));
           const authorizationToken = response.headers.get("Authorization");
-          logout(authorizationToken); // Llama a la función logout del contexto para cerrar la sesión
+          logout(authorizationToken); 
           console.log("Sesión cerrada exitosamente");
         } else {
           throw new Error("Error al cerrar sesión");

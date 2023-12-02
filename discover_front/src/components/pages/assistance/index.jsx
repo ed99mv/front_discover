@@ -1,8 +1,9 @@
 import React from 'react'
+import CompaniesGalleries from '../../CompaniesGalleries/CompaniesGalleries';
 
 const AssistancePage = () => {
   return (
-    <div>index</div>
+    <div><CompaniesGalleries/></div>
   )
 }
 

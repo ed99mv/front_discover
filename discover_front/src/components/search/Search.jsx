@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Search.css'; // Archivo de estilos para el header
+import UserMenu from '../userMenu/UserMenu';
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -13,6 +14,7 @@ const Search = () => {
     <header className="main-header">
     <div className="custom-container">
       <h1 className="logo">Discover Pacific</h1>
+      {/* <UserMenu/> */}
       <div className="custom-search-box">
         <input
           type="text"
