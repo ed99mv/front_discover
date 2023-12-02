@@ -15,7 +15,7 @@ import {
   FormGroup,
   Input,
   Label,
-} from "reactstrap";
+} from "reactstrap";  
 
 const NewTourForm = ({ isOpen, toggleModal }) => {
   const { isLoggedIn, logout } = useContext(AuthContext);
@@ -51,7 +51,7 @@ const NewTourForm = ({ isOpen, toggleModal }) => {
     setTourData({ ...tourData, company_id: selectedCompanyId });
   };
 
-  const handleSelect = async (address) => {
+ const handleSelect = async (address) => {
     try {
       const results = await geocodeByAddress(address);
       console.log("Geocode results:", results);
@@ -131,7 +131,6 @@ const NewTourForm = ({ isOpen, toggleModal }) => {
 
     fetchUserCompanies();
   }, [userId]);
-  
   const modalStyles = {
     position: "absolute",
     top: "50%",

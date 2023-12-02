@@ -34,7 +34,7 @@ const SignIn = () => {
   };
 
   const closeRegisterModal = () => {
-    setShowRegisterModal(false); // Cierra el modal de registro
+    setShowRegisterModal(false); 
   };
 
   const handleEmailChange = (e) => {
@@ -73,12 +73,12 @@ const SignIn = () => {
       localStorage.setItem('token', authorizationToken);
       login(authorizationToken);
       console.log("Inicio de sesión exitoso");
-      // console.log("Token de autorización:", authorizationToken);
+  
 
       closeModal();
     } catch (error) {
       console.error("Error en el inicio de sesión:", error);
-      // Manejar errores de inicio de sesión
+    
     }
   };
 

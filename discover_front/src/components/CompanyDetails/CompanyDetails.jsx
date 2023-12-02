@@ -2,28 +2,20 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./App.css";
 import Loading from "../loading/Loading";
+import ModalToursCompanyID from "../ModalToursCompanyID/ModalToursCompanyID";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 
-const TourDetails = () => {
+function CompanyDetails() {
   const { id } = useParams();
   const [tourDetails, setTourDetails] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [companyName, setCompanyName] = useState("");
-
-  const openImage = (image) => {
-    setSelectedImage(image);
-  };
-
-  const closeImage = () => {
-    setSelectedImage(null);
-  };
+  const [associatedTours, setAssociatedTours] = useState([]);
 
   useEffect(() => {
-    const fetchTourDetails = async () => {
+    const fetchCompanyDetails = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3001/api/v1/tours/${id}`
+          `http://localhost:3001/api/v1/companies/${id}`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok.");
@@ -31,21 +23,20 @@ const TourDetails = () => {
         const tourData = await response.json();
         setTourDetails(tourData);
 
-        // Obtener detalles de la compañía por su ID
-        const companyResponse = await fetch(
-          `http://localhost:3001/api/v1/tours/${id}/company_id`
+        // Obtener los tours asociados a esta compañía
+        const associatedToursResponse = await fetch(
+          `http://localhost:3001/api/v1/companies/${id}/associated_tours`
         );
-        if (!companyResponse.ok) {
-          throw new Error("Failed to fetch company name.");
+        if (!associatedToursResponse.ok) {
+          throw new Error("Failed to fetch associated tours.");
         }
-        const companyData = await companyResponse.json();
-        setCompanyName(companyData.name);
+        const associatedToursData = await associatedToursResponse.json();
+        setAssociatedTours(associatedToursData);
       } catch (error) {
         console.error("Error fetching tour details:", error);
       }
     };
-
-    fetchTourDetails();
+    fetchCompanyDetails();
   }, [id]);
 
   if (!tourDetails) {
@@ -64,31 +55,20 @@ const TourDetails = () => {
       <div className="tour-details-content">
         <div className="header">
           <h2>{tourDetails.name}</h2>
-          <p>{companyName}</p>
         </div>
 
         <div className="description">
           <h3>Descripción</h3>
           <p>{tourDetails.description}</p>
-        </div>
-      </div>
-      <p className="location">📍 {tourDetails.ubication}</p>
-      <p className="price">₡ {tourDetails.price} por persona</p>
-      {selectedImage && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={closeImage}>
-              &times;
-            </span>
-            <img src={selectedImage.photo_path} alt="Selected Image" />
+          <p className="location">📍 {tourDetails.ubication}</p>
+          <ModalToursCompanyID associatedTours={associatedTours} />
+          <div className="center-gallery">
+            <ImageGallery items={images} />
           </div>
         </div>
-      )}
-      <div className="center-gallery">
-        <ImageGallery items={images} />
       </div>
     </div>
   );
-};
+}
 
-export default TourDetails;
+export default CompanyDetails;

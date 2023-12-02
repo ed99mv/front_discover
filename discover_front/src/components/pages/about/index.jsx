@@ -5,7 +5,7 @@ import NewCompanyForm from "../../form_company/NewCompanyForm";
 const AboutPage = () => {
   return (
     <>
-      <div><NewCompanyForm/></div>
+      <div></div>
     </>
   );
 };
