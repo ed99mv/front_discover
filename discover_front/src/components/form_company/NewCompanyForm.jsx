@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../authContext";
+import FlashCreateCompany from "../messages/flashCreateCompany/FlashCreateCompany";
 
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -18,6 +19,7 @@ import {
 } from "reactstrap";
 
 const NewCompanyForm = ({ isOpen, toggleModalCompany }) => {
+  //  const [companyCreated, setCompanyCreated] = useState(false);
   const { isLoggedIn, logout } = useContext(AuthContext);
   const { authToken, userId } = useContext(AuthContext);
   const [address, setAddress] = useState("");
@@ -96,8 +98,9 @@ const NewCompanyForm = ({ isOpen, toggleModalCompany }) => {
           ubication: "",
           images: [],
         });
-
+        // setCompanyCreated(true);
         toggleModalCompany();
+        window.location.reload(); 
       } else {
         console.log("no se pudo crear la compañía");
       }
@@ -115,6 +118,8 @@ const NewCompanyForm = ({ isOpen, toggleModalCompany }) => {
   return (
     <>
       {isLoggedIn && (
+      <>
+       {/* <FlashCreateCompany isVisible={companyCreated} onClose={() => setCompanyCreated(false)} /> Muestra el mensaje FlashCreateCompany */}
         <Modal isOpen={isOpen} style={modalStyles}>
           <ModalHeader>Company Form</ModalHeader>
           <form onSubmit={handleSubmit}>
@@ -204,6 +209,7 @@ const NewCompanyForm = ({ isOpen, toggleModalCompany }) => {
             </ModalFooter>
           </form>
         </Modal>
+        </>
       )}
     </>
   );

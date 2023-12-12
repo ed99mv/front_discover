@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import './Search.css'; // Archivo de estilos para el header
-import UserMenu from '../userMenu/UserMenu';
+import './Search.css'; 
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -22,7 +21,7 @@ const Search = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <button onClick={handleSearch}>Buscar</button>
+       
       </div>
     </div>
   </header>

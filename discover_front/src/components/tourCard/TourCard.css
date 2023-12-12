@@ -2,170 +2,254 @@
 
 /* Estilo base para las tarjetas */
 .tour-card {
-    width: calc(25% - 20px); /* Ancho para mostrar 4 tarjetas por fila */
-    border: 1px solid #ddd;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease-in-out;
-    margin-bottom: 20px;
-  }
-  
-  .tour-card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  .carousel-container {
-    width: 100%;
-    height: 300px;
-  }
-  
-  .image-slide {
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .image-slide img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-  }
-  
-  .card-link {
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  .tour-details {
-    padding: 20px;
-  }
-  
-  .tour-name {
-    font-size: 1.4em;
-    margin-bottom: 10px;
-  }
-  
-  .tour-details p {
-    margin-bottom: 8px;
-    font-size: 1em;
-  }
-  
-  .tour-details p strong {
-    font-weight: bold;
-  }
-  
-  .card-link::after {
-    content: "Ver detalles";
-    display: block;
-    text-align: center;
-    background-color: #008489;
-    color: #fff;
-    padding: 10px;
-    border-radius: 6px;
-    margin-top: 20px;
-    transition: background-color 0.3s ease-in-out;
-  }
-  
-  .card-link:hover::after {
-    background-color: #005e63;
-  }
-  
-  /* Contenedor flex para las tarjetas */
-  .tour-card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 20px;
-  }
+  width: calc(25% - 20px); /* Ancho para mostrar 4 tarjetas por fila */
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+  margin-bottom: 20px;
+}
 
-  
-  /* TourCard.css */
+.carousel-container {
+  width: 100%;
+  height: 300px;
+}
 
-/* Estilo base para las tarjetas */
-.tour-card {
-    width: calc(25% - 20px); /* Ancho para mostrar 4 tarjetas por fila */
-    margin-bottom: 20px;
-    display: inline-block; /* Muestra las tarjetas en línea */
-    box-sizing: border-box;
-  }
-  
-  /* Resto de los estilos para la tarjeta (imagen, detalles, etc.) permanecen igual */
-  
-  /* Contenedor para las tarjetas */
-  .tour-card-container {
-    font-size: 0; /* Elimina el espacio entre las tarjetas */
-    width: 100%;
-  }
-  
-  /* Limpiar el espaciado residual */
-  .tour-card-container:after {
-    content: "";
-    display: block;
-    clear: both;
-  }
+.image-slide {
+  position: relative;
+  overflow: hidden;
+}
 
-  /* TourCard.css */
+.image-slide img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
 
-/* Estilo base para las tarjetas */
-.tour-card {
-    width: calc(25% - 20px); /* Ancho para mostrar 4 tarjetas por fila */
-    margin-bottom: 20px;
-    display: inline-block; /* Muestra las tarjetas en línea */
-    box-sizing: border-box;
-    margin-right: 20px; /* Espacio entre las tarjetas */
-    vertical-align: top; /* Alinea las tarjetas en la parte superior */
-  }
-  
-  /* Resto de los estilos para la tarjeta (imagen, detalles, etc.) permanecen igual */
-  
-  /* Contenedor para las tarjetas */
-  .tour-card-container {
-    font-size: 0; /* Elimina el espacio entre las tarjetas */
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Centra las tarjetas horizontalmente */
-    margin: 0 auto; /* Centra el contenedor en la página */
-    max-width: 1200px; /* Ajusta el ancho máximo del contenedor */
-  }
-  
-  /* Limpiar el espaciado residual */
-  .tour-card-container:after {
-    content: "";
-    display: block;
-    clear: both;
-  }
+.card-link {
+  text-decoration: none;
+  color: inherit;
+}
 
-  /* TourCard.css */
+.tour-details {
+  padding: 20px;
+}
+
+.tour-name {
+  font-size: 1.4em;
+  margin-bottom: 10px;
+}
+
+.tour-details p {
+  margin-bottom: 8px;
+  font-size: 1em;
+  font-family: sans-serif;
+}
+
+.tour-details p strong {
+  font-weight: bold;
+  font-family: sans-serif;
+}
+.image-slide {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-slide img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  /* transition: transform 0.3s ease-in-out; Agregado para animar el efecto de zoom */
+}
+
+/* .image-slide:hover img {
+  transform: scale(1.1); /* Ajusta el factor de escala según tus preferencias */
+
+.bi-geo-alt-fill {
+  margin-right: 3px;
+}
+
+.bi-house {
+  margin-right: 3px;
+}
+.bi-cash {
+  margin-right: 3px;
+}
+
+/* .p-ubication{
+    color: darkgrey;
+  } */
+.card-link::after {
+  content: "Ver detalles";
+  display: block;
+  text-align: center;
+  background-color: #008489;
+  color: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 20px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.card-link:hover::after {
+  background-color: #005e63;
+}
+
+/* Contenedor flex para las tarjetas */
+.tour-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* TourCard.css */
 
 /* Estilo base para las tarjetas */
 .tour-card {
-    width: calc(25% - 20px); /* Ancho para mostrar 4 tarjetas por fila */
-    margin-bottom: 20px;
-    display: inline-block; /* Muestra las tarjetas en línea */
-    box-sizing: border-box;
-    margin-right: 20px; /* Espacio entre las tarjetas */
-    vertical-align: top; /* Alinea las tarjetas en la parte superior */
+  width: calc(25% - 20px); /* Ancho para mostrar 4 tarjetas por fila */
+  margin-bottom: 20px;
+  display: inline-block; /* Muestra las tarjetas en línea */
+  box-sizing: border-box;
+}
+
+/* Resto de los estilos para la tarjeta (imagen, detalles, etc.) permanecen igual */
+
+/* Contenedor para las tarjetas */
+.tour-card-container {
+  font-size: 0; /* Elimina el espacio entre las tarjetas */
+  width: 100%;
+}
+
+/* Limpiar el espaciado residual */
+.tour-card-container:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* TourCard.css */
+
+/* Estilo base para las tarjetas */
+.tour-card {
+  width: calc(45% - 20px); /* Ancho para mostrar 4 tarjetas por fila */
+  margin-bottom: 20px;
+  display: inline-block; /* Muestra las tarjetas en línea */
+  box-sizing: border-box;
+  margin-right: 0px; /* Espacio entre las tarjetas */
+  vertical-align: top; /* Alinea las tarjetas en la parte superior */
+}
+
+/* Resto de los estilos para la tarjeta (imagen, detalles, etc.) permanecen igual */
+
+/* Contenedor para las tarjetas */
+.tour-card-container {
+  font-size: 0; /* Elimina el espacio entre las tarjetas */
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centra las tarjetas horizontalmente */
+  margin: 0 auto; /* Centra el contenedor en la página */
+  max-width: 1200px; /* Ajusta el ancho máximo del contenedor */
+}
+
+/* Limpiar el espaciado residual */
+.tour-card-container:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* TourCard.css */
+
+/* Estilo base para las tarjetas */
+.tour-card {
+  margin: 10px;
+  width: calc(22.222% - 10px); /* Ancho para mostrar 4 tarjetas por fila */
+  margin-bottom: 20px;
+  margin-left: 22px;
+  display: inline-block; /* Muestra las tarjetas en línea */
+  box-sizing: border-box;
+  margin-right: 20px; /* Espacio entre las tarjetas */
+  vertical-align: top; /* Alinea las tarjetas en la parte superior */
+}
+
+/* Resto de los estilos para la tarjeta (imagen, detalles, etc.) permanecen igual */
+
+/* Contenedor para las tarjetas */
+.tour-card-container {
+  font-size: 0; /* Elimina el espacio entre las tarjetas */
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centra las tarjetas horizontalmente */
+  margin: 0 auto; /* Centra el contenedor en la página */
+  max-width: 1200px; /* Ajusta el ancho máximo del contenedor */
+  & > * {
+    flex-basis: calc(
+      33.3333% - 20px
+    ); /* Ajusta según el espacio entre las tarjetas */
+    margin: 10px; /* Espacio entre las tarjetas */
   }
-  
-  /* Resto de los estilos para la tarjeta (imagen, detalles, etc.) permanecen igual */
-  
-  /* Contenedor para las tarjetas */
-  .tour-card-container {
-    font-size: 0; /* Elimina el espacio entre las tarjetas */
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Centra las tarjetas horizontalmente */
-    margin: 0 auto; /* Centra el contenedor en la página */
-    max-width: 1200px; /* Ajusta el ancho máximo del contenedor */
+}
+
+.tour-name {
+  text-transform: capitalize;
+  font-family: sans-serif;
+  margin-bottom: 20px;
+  /* text-align: center; */
+}
+
+.agente {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+
+.card-link::after {
+  content: "Ver detalles";
+  display: block;
+
+  text-align: center;
+  background-color: #008489;
+  margin-bottom: -px;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: -10px;
+  transition: background-color 0.3s ease-in-out;
+  text-transform: capitalize;
+}
+
+.tour-card {
+  width: calc(25% - 20px); /* Ancho para mostrar 4 tarjetas por fila */
+  margin: 10px; /* Espacio entre las tarjetas */
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;
+}
+
+/* Contenedor para las tarjetas */
+.tour-card-container {
+  font-size: 0; /* Elimina el espacio entre las tarjetas */
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Distribuye el espacio horizontalmente */
+  padding: 10px; /* Agrega un poco de espacio entre el borde y las tarjetas */
+}
+
+/* Media query para dispositivos móviles */
+@media screen and (max-width: 768px) {
+  .tour-card {
+    width: calc(
+      100% - 20px
+    ); /* Ancho para mostrar 2 tarjetas por fila en móvil */
+    margin-right: 0; /* Elimina el margen entre tarjetas */
+    margin: 15px;
   }
-  
-  /* Media query para dispositivos móviles */
-  @media screen and (max-width: 768px) {
-    .tour-card {
-      width: calc(50% - 20px); /* Ancho para mostrar 2 tarjetas por fila en móvil */
-      margin-right: 0; /* Elimina el margen entre tarjetas */
-    }
-  }
-  
+}
+
+/* Estilo base para las tarjetas */

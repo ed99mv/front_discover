@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import TourCard from '../tourCard/TourCard';
-
+import Loading from '../loading/Loading';
 const TourGallery = () => {
   const [tours, setTours] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchTours = async () => {
       try {
@@ -26,6 +26,7 @@ const TourGallery = () => {
         );
 
         setTours(toursWithCompanyDetails);
+        setIsLoading(false);
       } catch (error) {
         console.error('Error fetching tours:', error);
       }
@@ -33,6 +34,10 @@ const TourGallery = () => {
 
     fetchTours();
   }, []);
+
+  if (isLoading) {
+    return <Loading />; 
+  }
 
   return (
     <div className="gallery-container">

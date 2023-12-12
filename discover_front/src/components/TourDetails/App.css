@@ -1,197 +1,274 @@
 /* Estilos para la página de detalles del tour */
 .tour-details {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .header {
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .header h2 {
-    font-size: 28px;
-    margin-bottom: 5px;
-  }
-  
-  .location {
-    color: #666;
-  }
-  
-  .price {
-    font-weight: bold;
-  }
-  
-  .description h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  
-  .images h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  
-  .image-gallery {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  
-  .image-gallery img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
-  }
-  
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
 
-  .modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-  }
-  
-  .modal-content {
-    position: relative;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-  }
-  
-  .modal-content img {
-    max-width: 100%;
-    max-height: 80vh;
-  }
-  
-  .close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    cursor: pointer;
-    color: #888;
-  }
 
-  .pl {
-    display: block;
-    width: 9.375em;
-    height: 9.375em;
-  }
-  
-  .pl__arrows,
-  .pl__ring-rotate,
-  .pl__ring-stroke,
-  .pl__tick {
-    animation-duration: 2s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-  }
-  
-  .pl__arrows {
-    animation-name: arrows42;
+
+.header {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.header h2 {
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+.location {
+  color: #666;
+}
+
+.price {
+  font-weight: bold;
+}
+
+.description h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.images h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.image-gallery {
+  display: grid !important;
+  grid-template-rows: 1fr !important;
+  grid-template-columns: 1fr 2fr 2fr !important;
+  gap: 3px !important;
+  margin: 10px !important;
+  margin-right: 10px !important;
+}
+.image-gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.image-gallery img:first-child {
+  grid-column: span 2; /* La primera imagen ocupa dos columnas */
+  grid-row: span 2; /* La primera imagen ocupa dos filas */
+}
+
+.map-icon {
+font-size: 20px;
+color: #34d0db;
+transition: transform 0.3s ease-in-out;
+}
+
+.map-icon:hover {
+transform: scale(0.90);
+}
+
+.money-bill-icon {
+font-size: 20px;
+color: #2ecc71;
+transition: transform 0.3s ease-in-out;
+}
+
+.money-bill-icon:hover {
+transform: scale(0.90);
+}
+
+.map-icon i,
+.money-bill-icon i {
+vertical-align: middle;
+}
+
+.map-icon span,
+.money-bill-icon span {
+display: inline-block;
+vertical-align: middle;
+margin-left: 8px; /* Ajusta el margen según sea necesario */
+}
+
+.home-icon i,
+.home-icon span {
+font-size: 20px;
+color: #3498db; /* Ajusta el color según sea necesario */
+transition: transform 0.3s ease-in-out;
+cursor: pointer;
+vertical-align: middle;
+}
+
+.home-icon span {
+display: inline-block;
+vertical-align: middle;
+margin-left: 8px; /* Ajusta el margen según sea necesario */
+}
+
+.home-icon:hover i,
+.home-icon:hover span {
+transform: scale(0.90);
+}
+
+.titulo-detalles {
+font-family: 'Helvetica', Arial, sans-serif; /* Puedes cambiar la fuente según tus preferencias */
+font-size: 2.5em; /* Tamaño de la fuente */
+color: lightseagreen; /* Color del texto */
+text-transform: capitalize; /* Convertir el texto a mayúsculas */
+letter-spacing: 1px; /* Espaciado entre letras */
+margin-bottom: 10px; /* Margen inferior */
+text-align: center; /* Alineación del texto, puedes ajustar según sea necesario */
+font-weight: normal; /* Peso normal de la fuente */
+font-style: italic; /* Estilo de la fuente (puedes quitar esto si no lo deseas) */
+font-stretch: expanded; /* Expande ligeramente la anchura de la fuente */
+}
+
+.span{
+  margin-right: 5px;
+}
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+  text-transform: capitalize;
+  position: relative;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.modal-content img {
+  max-width: 100%;
+  max-height: 80vh;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #888;
+}
+
+.pl {
+  display: block;
+  width: 9.375em;
+  height: 9.375em;
+}
+
+.pl__arrows,
+.pl__ring-rotate,
+.pl__ring-stroke,
+.pl__tick {
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.pl__arrows {
+  animation-name: arrows42;
+  transform: rotate(45deg);
+  transform-origin: 16px 52px;
+}
+
+.pl__ring-rotate,
+.pl__ring-stroke {
+  transform-origin: 80px 80px;
+}
+
+.pl__ring-rotate {
+  animation-name: ringRotate42;
+}
+
+.pl__ring-stroke {
+  animation-name: ringStroke42;
+  transform: rotate(-45deg);
+}
+
+.pl__tick {
+  animation-name: tick42;
+}
+
+.pl__tick:nth-child(2) {
+  animation-delay: -1.75s;
+}
+
+.pl__tick:nth-child(3) {
+  animation-delay: -1.5s;
+}
+
+.pl__tick:nth-child(4) {
+  animation-delay: -1.25s;
+}
+
+.pl__tick:nth-child(5) {
+  animation-delay: -1s;
+}
+
+.pl__tick:nth-child(6) {
+  animation-delay: -0.75s;
+}
+
+.pl__tick:nth-child(7) {
+  animation-delay: -0.5s;
+}
+
+.pl__tick:nth-child(8) {
+  animation-delay: -0.25s;
+}
+
+/* Animations */
+@keyframes arrows42 {
+  from {
     transform: rotate(45deg);
-    transform-origin: 16px 52px;
   }
-  
-  .pl__ring-rotate,
-  .pl__ring-stroke {
-    transform-origin: 80px 80px;
+
+  to {
+    transform: rotate(405deg);
   }
-  
-  .pl__ring-rotate {
-    animation-name: ringRotate42;
+}
+
+@keyframes ringRotate42 {
+  from {
+    transform: rotate(0);
   }
-  
-  .pl__ring-stroke {
-    animation-name: ringStroke42;
+
+  to {
+    transform: rotate(720deg);
+  }
+}
+
+@keyframes ringStroke42 {
+  from,
+    to {
+    stroke-dashoffset: 452;
     transform: rotate(-45deg);
   }
-  
-  .pl__tick {
-    animation-name: tick42;
+
+  50% {
+    stroke-dashoffset: 169.5;
+    transform: rotate(-180deg);
   }
-  
-  .pl__tick:nth-child(2) {
-    animation-delay: -1.75s;
-  }
-  
-  .pl__tick:nth-child(3) {
-    animation-delay: -1.5s;
-  }
-  
-  .pl__tick:nth-child(4) {
-    animation-delay: -1.25s;
-  }
-  
-  .pl__tick:nth-child(5) {
-    animation-delay: -1s;
-  }
-  
-  .pl__tick:nth-child(6) {
-    animation-delay: -0.75s;
-  }
-  
-  .pl__tick:nth-child(7) {
-    animation-delay: -0.5s;
-  }
-  
-  .pl__tick:nth-child(8) {
-    animation-delay: -0.25s;
-  }
-  
-  /* Animations */
-  @keyframes arrows42 {
-    from {
-      transform: rotate(45deg);
-    }
-  
+}
+
+@keyframes tick42 {
+  from,
+    3%,
+    47%,
     to {
-      transform: rotate(405deg);
-    }
+    stroke-dashoffset: -12;
   }
-  
-  @keyframes ringRotate42 {
-    from {
-      transform: rotate(0);
-    }
-  
-    to {
-      transform: rotate(720deg);
-    }
+
+  14%,
+    36% {
+    stroke-dashoffset: 0;
   }
-  
-  @keyframes ringStroke42 {
-    from,
-      to {
-      stroke-dashoffset: 452;
-      transform: rotate(-45deg);
-    }
-  
-    50% {
-      stroke-dashoffset: 169.5;
-      transform: rotate(-180deg);
-    }
-  }
-  
-  @keyframes tick42 {
-    from,
-      3%,
-      47%,
-      to {
-      stroke-dashoffset: -12;
-    }
-  
-    14%,
-      36% {
-      stroke-dashoffset: 0;
-    }
-  }
+}
