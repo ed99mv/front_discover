@@ -34,7 +34,7 @@ const SignIn = () => {
   };
 
   const closeRegisterModal = () => {
-    setShowRegisterModal(false); 
+    setShowRegisterModal(false);
   };
 
   const handleEmailChange = (e) => {
@@ -70,15 +70,14 @@ const SignIn = () => {
       // Guardar el token de autenticación en localStorage
       const authorizationToken = response.headers.get("Authorization");
       console.log(authorizationToken);
-      localStorage.setItem('token', authorizationToken);
+      localStorage.setItem("token", authorizationToken);
       login(authorizationToken);
       console.log("Inicio de sesión exitoso");
-  
 
       closeModal();
+      window.location.reload();
     } catch (error) {
       console.error("Error en el inicio de sesión:", error);
-    
     }
   };
 

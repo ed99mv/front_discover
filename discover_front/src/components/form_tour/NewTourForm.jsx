@@ -94,7 +94,7 @@ const NewTourForm = ({ isOpen, toggleModal }) => {
 
       const createdTour = await response.json();
       console.log("Tour creado:", createdTour);
-      window.location.reload();
+      window.location.reload(); 
       // Manejar la respuesta después de crear el tour
     } catch (error) {
       console.error("Error al crear el tour:", error);

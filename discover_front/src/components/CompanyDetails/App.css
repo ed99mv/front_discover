@@ -1,4 +1,9 @@
 /* Estilos para la página de detalles del tour */
+
+.boton{
+  margin-left: 0%;
+}
+
 .tour-details {
     max-width: 800px;
     margin: 0 auto;
@@ -11,7 +16,48 @@
     padding-bottom: 20px;
     margin-bottom: 20px;
   }
+
   
+  
+  
+  #scrollspyHeading1 {
+    font-family: 'Helvetica', Arial, sans-serif; /* Puedes cambiar la fuente según tus preferencias */
+    font-size: 1.5em; /* Tamaño de la fuente */
+    color: lightseagreen; /* Color del texto */
+    text-transform: capitalize; /* Convertir el texto a mayúsculas */
+    letter-spacing: 1px; /* Espaciado entre letras */
+    margin-bottom: 10px; /* Margen inferior */
+     /* Alineación del texto, puedes ajustar según sea necesario */
+    font-weight: normal; /* Peso normal de la fuente */
+    font-style: italic; /* Estilo de la fuente (puedes quitar esto si no lo deseas) */
+    font-stretch: expanded; /* Expande ligeramente la anchura de la fuente */
+  }
+  
+#scrollspyHeading2 {
+  font-family: 'Helvetica', Arial, sans-serif; /* Puedes cambiar la fuente según tus preferencias */
+  font-size: 1.5em; /* Tamaño de la fuente */
+  color: lightseagreen; /* Color del texto */
+  text-transform: capitalize; /* Convertir el texto a mayúsculas */
+  letter-spacing: 1px; /* Espaciado entre letras */
+  margin-bottom: 10px; /* Margen inferior */
+   /* Alineación del texto, puedes ajustar según sea necesario */
+  font-weight: normal; /* Peso normal de la fuente */
+  font-style: italic; /* Estilo de la fuente (puedes quitar esto si no lo deseas) */
+  font-stretch: expanded; /* Expande ligeramente la anchura de la fuente */
+  }
+
+  #scrollspyHeading3 {
+    font-family: 'Helvetica', Arial, sans-serif; /* Puedes cambiar la fuente según tus preferencias */
+    font-size: 1.7em; /* Tamaño de la fuente */
+    color: lightseagreen;  /* Color del texto */
+    text-transform: capitalize; /* Convertir el texto a mayúsculas */
+    letter-spacing: 1px; /* Espaciado entre letras */
+    margin-bottom: 10px; /* Margen inferior */
+   /* Alineación del texto, puedes ajustar según sea necesario */
+    font-weight: normal; /* Peso normal de la fuente */
+    font-style: italic; /* Estilo de la fuente (puedes quitar esto si no lo deseas) */
+    font-stretch: expanded; /* Expande ligeramente la anchura de la fuente */
+  }
   .header h2 {
     font-size: 28px;
     margin-bottom: 5px;
@@ -86,7 +132,52 @@
     width: 9.375em;
     height: 9.375em;
   }
+
+  .la-p{
+    font-size: 1.9em;
+    margin: 15px;
+    color: rgb(0, 0, 0);
+  }
   
+  .home-icon i,
+.home-icon span {
+font-size: 20px;
+color: #3498db; /* Ajusta el color según sea necesario */
+transition: transform 0.3s ease-in-out;
+ cursor: pointer; 
+vertical-align: middle;
+}
+.home-icon{
+  margin-left: 10%;
+}
+
+.map-icon {
+  margin-left: 10%; /* Ajusta el margen izquierdo según sea necesario para que coincida con el home-icon */
+}
+
+.image-gallery-fullscreen-button{
+  display: none;
+}
+
+.image-gallery-play-button{
+  display: none;
+}
+.map-icon i,
+.map-icon span {
+  font-size: 20px;
+  color: #3498db;
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+
+.center-gallery{
+  display: flex;
+  justify-content: center;
+}
+
+
   .pl__arrows,
   .pl__ring-rotate,
   .pl__ring-stroke,
@@ -197,9 +288,28 @@
   }
 
 .center-gallery {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: flex !important;
+  justify-content: center !important;
+  /* align-items: center; */
   height: 100%; 
+   margin-left: 10%; 
 }
 
+
+.image-gallery-left-nav .image-gallery-svg,
+.image-gallery-right-nav .image-gallery-svg {
+    height: 30px !important;
+    width: 15px !important;
+}
+
+
+.image-gallery-svg{
+  height: 25px;
+  width: 20px;
+}
+
+.image{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
