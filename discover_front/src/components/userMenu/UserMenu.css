@@ -84,4 +84,7 @@
 .menu {
   /* ... */
   z-index: 2; /* Establecer un z-index mayor para el menú */
+  display: block;
 }
+
+

@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
-// import "./NewTourForm.css";
+import React, { useState, useEffect, useContext } from "react";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
-import { useContext } from "react";
-import { AuthContext } from "../../authContext";
+import Swal from "sweetalert2";
 import {
   Button,
   Modal,
@@ -15,11 +13,11 @@ import {
   FormGroup,
   Input,
   Label,
-} from "reactstrap";  
+} from "reactstrap";
+import { AuthContext } from "../../authContext";
 
 const NewTourForm = ({ isOpen, toggleModal }) => {
-  const { isLoggedIn, logout } = useContext(AuthContext);
-  const { authToken, userId } = useContext(AuthContext);
+  const { isLoggedIn, authToken, userId } = useContext(AuthContext);
   const [address, setAddress] = useState("");
   const [tourData, setTourData] = useState({
     name: "",
@@ -33,7 +31,7 @@ const NewTourForm = ({ isOpen, toggleModal }) => {
   const [userCompanies, setUserCompanies] = useState([]);
 
   const handleChange = (address) => {
-    setAddress(address); // Actualiza el estado del valor del lugar
+    setAddress(address);
   };
 
   const handleInputChange = (event) => {
@@ -51,23 +49,22 @@ const NewTourForm = ({ isOpen, toggleModal }) => {
     setTourData({ ...tourData, company_id: selectedCompanyId });
   };
 
- const handleSelect = async (address) => {
+  const handleSelect = async (address) => {
     try {
       const results = await geocodeByAddress(address);
-      console.log("Geocode results:", results);
-  
+
       if (results && results.length > 0) {
         const selectedAddress = results[0].formatted_address;
-        console.log("Selected address:", selectedAddress);
-        setTourData({ ...tourData, ubication: selectedAddress }); // Actualiza el estado de la ubicación con la dirección completa
+        setTourData({ ...tourData, ubication: selectedAddress });
       } else {
-        console.error("No se pudo encontrar la dirección completa en la dirección proporcionada.");
+        console.error(
+          "No se pudo encontrar la dirección completa en la dirección proporcionada."
+        );
       }
     } catch (error) {
       console.error("Error al obtener la dirección completa:", error);
     }
   };
-  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -83,9 +80,14 @@ const NewTourForm = ({ isOpen, toggleModal }) => {
     });
 
     try {
+      toggleModal(); // Cerrar el formulario antes de realizar la petición
+
       const response = await fetch("http://localhost:3001/api/v1/tours", {
         method: "POST",
         body: formData,
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
       });
 
       if (!response.ok) {
@@ -94,16 +96,27 @@ const NewTourForm = ({ isOpen, toggleModal }) => {
 
       const createdTour = await response.json();
       console.log("Tour creado:", createdTour);
-      window.location.reload(); 
-      // Manejar la respuesta después de crear el tour
+
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Tour creado exitosamente",
+        showConfirmButton: false,
+        timer: 1000,
+        customClass: {
+          popup: "center-alert-popup",
+        },
+      }).then(() => {
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      });
     } catch (error) {
       console.error("Error al crear el tour:", error);
     }
   };
 
   useEffect(() => {
-    console.log("Valor del authToken:", userId);
-    console.log(authToken);
     const fetchUserCompanies = async () => {
       try {
         const response = await fetch(
@@ -130,7 +143,8 @@ const NewTourForm = ({ isOpen, toggleModal }) => {
     };
 
     fetchUserCompanies();
-  }, [userId]);
+  }, [userId, authToken]);
+
   const modalStyles = {
     position: "absolute",
     top: "50%",
@@ -142,13 +156,14 @@ const NewTourForm = ({ isOpen, toggleModal }) => {
     <>
       {isLoggedIn && (
         <Modal isOpen={isOpen} toggle={toggleModal} style={modalStyles}>
-          <ModalHeader toggle={toggleModal}>Tour Form</ModalHeader>
+          <ModalHeader toggle={toggleModal}>Formulario de creación de nuevo Tour</ModalHeader>
           <form className="tour-form" onSubmit={handleSubmit}>
             <ModalBody>
               <FormGroup>
                 <Label>
-                  Name:
+                  Nombre del tour:
                   <Input
+                  placeholder="ejm: Isla Mujeres"
                     type="text"
                     name="name"
                     value={tourData.name}
@@ -158,7 +173,7 @@ const NewTourForm = ({ isOpen, toggleModal }) => {
               </FormGroup>
               <FormGroup>
                 <Label>
-                  Description:
+                  Descripción del tour:
                   <Input
                     type="text"
                     name="description"
@@ -168,7 +183,7 @@ const NewTourForm = ({ isOpen, toggleModal }) => {
                 </Label>
               </FormGroup>
               <FormGroup>
-                <Label for="ubication">Ubication:</Label>
+                <Label for="ubication">Ubicación:</Label>
                 <PlacesAutocomplete
                   value={address}
                   onChange={handleChange}
@@ -185,19 +200,25 @@ const NewTourForm = ({ isOpen, toggleModal }) => {
                     <div id="ubication">
                       <input
                         {...getInputProps({
-                          placeholder: "Search Places ...",
+                          placeholder: "Buscar lugar ...",
                           className: "location-search-input",
                         })}
                       />
                       <div className="autocomplete-dropdown-container">
-                        {loading && <div>Loading...</div>}
+                        {loading && <div>Cargando...</div>}
                         {suggestions.map((suggestion, index) => {
                           const className = suggestion.active
                             ? "suggestion-item--active"
                             : "suggestion-item";
                           const style = suggestion.active
-                            ? { backgroundColor: "#fafafa", cursor: "pointer" }
-                            : { backgroundColor: "#ffffff", cursor: "pointer" };
+                            ? {
+                                backgroundColor: "#fafafa",
+                                cursor: "pointer",
+                              }
+                            : {
+                                backgroundColor: "#ffffff",
+                                cursor: "pointer",
+                              };
                           return (
                             <div
                               key={index}
@@ -217,7 +238,7 @@ const NewTourForm = ({ isOpen, toggleModal }) => {
               </FormGroup>
               <FormGroup>
                 <Label>
-                  Price:
+                  Precio:
                   <Input
                     type="number"
                     name="price"
@@ -228,18 +249,19 @@ const NewTourForm = ({ isOpen, toggleModal }) => {
               </FormGroup>
               <FormGroup>
                 <Label>
-                  Images:
+                  Añadir:
                   <Input type="file" multiple onChange={handleImageChange} />
                 </Label>
               </FormGroup>
               <FormGroup>
                 <Label>
-                  Company:
+                  Compañía: 
+                  <br />
                   <select
                     value={tourData.company_id}
                     onChange={handleCompanyChange}
                   >
-                    <option value="">Select a company</option>
+                    <option value="">Selecciona una compañía</option>
                     {userCompanies.map((company) => (
                       <option key={company.id} value={company.id}>
                         {company.name}
@@ -251,16 +273,15 @@ const NewTourForm = ({ isOpen, toggleModal }) => {
             </ModalBody>
             <ModalFooter>
               <Button color="primary" type="submit">
-                Create Tour
+                Crear Tour
               </Button>
               <Button color="secondary" onClick={toggleModal}>
-                Cancel
+                Cancelar
               </Button>
             </ModalFooter>
           </form>
         </Modal>
       )}
-      ;
     </>
   );
 };

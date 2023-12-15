@@ -4,6 +4,7 @@ import { Carousel, Modal, Button } from "react-bootstrap";
 import "./App.css";
 import Loading from "../loading/Loading";
 import TourDelete from "../TourDelete/TourDelete";
+import ContactUs from "../../contactUs/ContactUs";
 
 const TourDetails = () => {
   const { id } = useParams();
@@ -12,6 +13,7 @@ const TourDetails = () => {
   const [showCarousel, setShowCarousel] = useState(false);
   const [companyName, setCompanyName] = useState("");
   const [companyId, setCompanyId] = useState("");
+  const [companyUserEmail, setCompanyUserEmail] = useState("");
 
   const openImage = (image) => {
     setSelectedImage(image);
@@ -41,7 +43,6 @@ const TourDetails = () => {
         const tourData = await response.json();
         setTourDetails(tourData);
 
-        // Obtener detalles de la compañía por su ID
         const companyResponse = await fetch(
           `http://localhost:3001/api/v1/tours/${id}/company_id`
         );
@@ -58,6 +59,28 @@ const TourDetails = () => {
 
     fetchTourDetails();
   }, [id]);
+
+  useEffect(() => {
+    const fetchCompanyUserEmail = async () => {
+      try {
+        const userEmailResponse = await fetch(
+          `http://localhost:3001/api/v1/tours/${id}/user_email_for_tour`
+        );
+        if (!userEmailResponse.ok) {
+          throw new Error("Failed to fetch company user email.");
+        }
+        const userEmailData = await userEmailResponse.json();
+        setCompanyUserEmail(userEmailData.email);
+        console.log(userEmailData);
+      } catch (error) {
+        console.error("Error fetching company user email:", error);
+      }
+    };
+
+    if (companyUserEmail === "") {
+      fetchCompanyUserEmail();
+    }
+  }, [id, companyUserEmail]);
 
   if (!tourDetails) {
     return <Loading />;
@@ -95,6 +118,7 @@ const TourDetails = () => {
                 Ver Todas las Imágenes
               </Button>
             )}
+            <ContactUs toEmail={companyUserEmail} />
           </div>
 
           <div className="col-md-6">

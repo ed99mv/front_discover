@@ -1,3 +1,5 @@
+import "./SignIn.css";
+import Swal from "sweetalert2";
 import React, { useState, useContext } from "react";
 import {
   Button,
@@ -15,11 +17,17 @@ import { AuthContext } from "../../authContext";
 
 const SignIn = () => {
   const { isLoggedIn, login } = useContext(AuthContext);
-  const [open, setOpen] = useState(!isLoggedIn);
+  const [open, setOpen] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState({
+    isVisible: false,
+    type: "", // Puede ser "success" o "error"
+    text: "",
+  });
 
+  
   const openModal = () => {
     setOpen(true);
     setShowRegisterModal(false);
@@ -30,11 +38,29 @@ const SignIn = () => {
   };
 
   const openRegisterModal = () => {
-    setShowRegisterModal(true); // Abrir el modal de registro al hacer clic en "Registrarme"
+    setShowRegisterModal(true);
   };
 
   const closeRegisterModal = () => {
     setShowRegisterModal(false);
+  };
+
+  const showMessageAndClose = (type, text) => {
+    console.log("Mostrando mensaje1:", type, text);
+    setMessage({
+      isVisible: true,
+      type,
+      text,
+    });
+
+    setTimeout(() => {
+      console.log("Cerrando mensaje");
+      setMessage({
+        isVisible: false,
+        type: "",
+        text: "",
+      });
+    }, 2000);
   };
 
   const handleEmailChange = (e) => {
@@ -67,17 +93,29 @@ const SignIn = () => {
 
       const data = await response.json();
 
-      // Guardar el token de autenticación en localStorage
       const authorizationToken = response.headers.get("Authorization");
-      console.log(authorizationToken);
       localStorage.setItem("token", authorizationToken);
       login(authorizationToken);
-      console.log("Inicio de sesión exitoso");
-
       closeModal();
-      window.location.reload();
+      
+      Swal.fire({
+        position: "center", // Use 'center' instead of 'top-end'
+        icon: "success",
+        title: "Inicio de sesión exitoso",
+        showConfirmButton: false,
+        timer: 1000,
+        customClass: {
+          // Add a custom class for centering
+          popup: "center-alert-popup",
+        },
+      }).then(() => {
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      });
     } catch (error) {
       console.error("Error en el inicio de sesión:", error);
+      showMessageAndClose("error", "Contraseña o email incorrecto");
     }
   };
 
@@ -119,6 +157,16 @@ const SignIn = () => {
               onChange={handlePasswordChange}
             />
           </FormGroup>
+
+                {message.isVisible && (
+        <>
+          <p className={`custom-flash-message ${message.type}`}>
+            {message.text}
+          </p>
+          {console.log("Mostrando mensaje2:", message.type, message.text)}
+        </>
+      )}
+
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={handleLogin}>
@@ -134,8 +182,8 @@ const SignIn = () => {
       </Modal>
 
       <RegisterModal
-        isOpen={showRegisterModal} // Propiedad para controlar la visibilidad del modal de registro
-        toggle={closeRegisterModal} // Función para cerrar el modal de registro
+        isOpen={showRegisterModal}
+        toggle={closeRegisterModal}
         handleLogin={handleLogin}
       />
     </>

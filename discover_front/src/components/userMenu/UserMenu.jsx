@@ -1,4 +1,4 @@
-import "./UserMenu.css";
+// UserMenu.jsx
 import React, { useContext, useRef, useState } from "react";
 import { useDetectOutsideClick } from "./useDetectOutsideClick";
 import { AuthContext } from "../../authContext";
@@ -6,7 +6,8 @@ import SignIn from "../SignIn/SignIn";
 import LogOut from "../logout/LogOut";
 import NewTourForm from "../form_tour/NewTourForm";
 import NewCompanyForm from "../form_company/NewCompanyForm";
-
+import RoleChange from "../RoleChange/RoleChange";
+import "./UserMenu.css";
 
 function UserMenu() {
   const { isLoggedIn, userRole, userName } = useContext(AuthContext);
@@ -14,34 +15,41 @@ function UserMenu() {
   const [isModalOpenCompany, setIsModalOpenCompany] = useState(false);
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
+  const [isRoleChangeOpen, setIsRoleChangeOpen] = useState(false);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
-    setIsModalOpenCompany(false); // Cerrar el formulario de empresa si se abre el de tour
+    setIsModalOpenCompany(false);
+    setIsRoleChangeOpen(false);
   };
 
   const toggleModalCompany = () => {
     setIsModalOpenCompany(!isModalOpenCompany);
-    setIsModalOpen(false); // Cerrar el formulario de tour si se abre el de empresa
+    setIsModalOpen(false);
+    setIsRoleChangeOpen(false);
+  };
+
+  const handleRoleChangeClick = () => {
+    setIsRoleChangeOpen(!isRoleChangeOpen);
+    setIsModalOpen(false);
+    setIsModalOpenCompany(false);
   };
 
   const toggleMenu = () => {
-    setIsActive(!isActive);
+    setIsActive(!isLoggedIn);
   };
 
   return (
     <div className="container">
       <div className="menu-container">
         <button onClick={toggleMenu} className="menu-trigger">
-          <span>
-            {isLoggedIn ? userName : 'Regístrate'}
-          </span>
+          <span>{isLoggedIn ? userName : "Regístrate"}</span>
           <img
             src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/df/df7789f313571604c0e4fb82154f7ee93d9989c6.jpg"
             alt="User avatar"
           />
         </button>
-        <nav ref={dropdownRef} className={`menu ${isActive ? 'active' : ''}`}>
+        <nav ref={dropdownRef} className={`menu ${isActive ? "active" : ""}`}>
           <ul>
             <li>{!isLoggedIn && <SignIn />}</li>
             {isLoggedIn && (
@@ -49,7 +57,7 @@ function UserMenu() {
                 <li>
                   <LogOut />
                 </li>
-                {(userRole === 'admin' || userRole === 'company') && (
+                {(userRole === "admin" || userRole === "company") && (
                   <>
                     <li>
                       <a onClick={toggleModal}>Crear Tour</a>
@@ -70,6 +78,21 @@ function UserMenu() {
                         <NewCompanyForm
                           isOpen={isModalOpenCompany}
                           toggleModalCompany={toggleModalCompany}
+                        />
+                      </li>
+                    )}
+                  </>
+                )}
+                {userRole === "admin" && (
+                  <>
+                    <li>
+                      <a onClick={handleRoleChangeClick}>Cambiar Rol</a>
+                    </li>
+                    {isRoleChangeOpen && (
+                      <li>
+                        <RoleChange
+                          isRoleChangeOpen={isRoleChangeOpen}
+                          toggle={handleRoleChangeClick}
                         />
                       </li>
                     )}

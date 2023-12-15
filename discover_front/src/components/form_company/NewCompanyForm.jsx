@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../authContext";
-import FlashCreateCompany from "../messages/flashCreateCompany/FlashCreateCompany";
-
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
@@ -17,9 +15,9 @@ import {
   Input,
   Label,
 } from "reactstrap";
+import Swal from "sweetalert2";
 
 const NewCompanyForm = ({ isOpen, toggleModalCompany }) => {
-  //  const [companyCreated, setCompanyCreated] = useState(false);
   const { isLoggedIn, logout } = useContext(AuthContext);
   const { authToken, userId } = useContext(AuthContext);
   const [address, setAddress] = useState("");
@@ -29,10 +27,6 @@ const NewCompanyForm = ({ isOpen, toggleModalCompany }) => {
     ubication: "",
     images: [],
   });
-
-  // const toggleModal = () => {
-  //   setIsOpen(!isOpen); // Cambia el estado isOpen al valor opuesto
-  // };
 
   const handleChangeAddress = (address) => {
     setAddress(address);
@@ -59,7 +53,7 @@ const NewCompanyForm = ({ isOpen, toggleModalCompany }) => {
       if (results && results.length > 0) {
         const selectedAddress = results[0].formatted_address;
         console.log("Selected address:", selectedAddress);
-        setCompanyData({ ...companyData, ubication: selectedAddress }); // Actualiza el estado de la ubicación con la dirección completa
+        setCompanyData({ ...companyData, ubication: selectedAddress });
       } else {
         console.error(
           "No se pudo encontrar la dirección completa en la dirección proporcionada."
@@ -78,7 +72,7 @@ const NewCompanyForm = ({ isOpen, toggleModalCompany }) => {
       formData.append("company[name]", companyData.name);
       formData.append("company[description]", companyData.description);
       formData.append("company[ubication]", companyData.ubication);
-      //   formData.append("company[user_id]", userId)
+
       companyData.images.forEach((image) => {
         formData.append(`company[images][]`, image);
       });
@@ -87,7 +81,7 @@ const NewCompanyForm = ({ isOpen, toggleModalCompany }) => {
         method: "POST",
         body: formData,
         headers: {
-          Authorization: `Bearer ${authToken}`, // Agregar el token de autenticación JWT
+          Authorization: `Bearer ${authToken}`,
         },
       });
 
@@ -98,16 +92,32 @@ const NewCompanyForm = ({ isOpen, toggleModalCompany }) => {
           ubication: "",
           images: [],
         });
-        // setCompanyCreated(true);
+
         toggleModalCompany();
-        window.location.reload(); 
+
+        // Muestra la alerta de éxito y recarga la página después de 1 segundo
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Company creada exitosamente",
+          showConfirmButton: false,
+          timer: 1000,
+          customClass: {
+            popup: "center-alert-popup",
+          },
+        }).then(() => {
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+        });
       } else {
-        console.log("no se pudo crear la compañía");
+        console.log("No se pudo crear la compañía");
       }
     } catch (error) {
       console.error(`Error creating company: ${error.message}`);
     }
   };
+
   const modalStyles = {
     position: "absolute",
     top: "50%",
@@ -118,15 +128,13 @@ const NewCompanyForm = ({ isOpen, toggleModalCompany }) => {
   return (
     <>
       {isLoggedIn && (
-      <>
-       {/* <FlashCreateCompany isVisible={companyCreated} onClose={() => setCompanyCreated(false)} /> Muestra el mensaje FlashCreateCompany */}
         <Modal isOpen={isOpen} style={modalStyles}>
-          <ModalHeader>Company Form</ModalHeader>
+          <ModalHeader>Formulario de creación de Agente Turístico</ModalHeader>
           <form onSubmit={handleSubmit}>
             <ModalBody>
               <FormGroup>
                 <Label>
-                  Name:
+                  Nombre de la agencia:
                   <Input
                     type="text"
                     name="name"
@@ -137,7 +145,7 @@ const NewCompanyForm = ({ isOpen, toggleModalCompany }) => {
               </FormGroup>
               <FormGroup>
                 <Label>
-                  Descripción:
+                  Descripción de la agencia:
                   <Input
                     type="text"
                     name="description"
@@ -147,7 +155,7 @@ const NewCompanyForm = ({ isOpen, toggleModalCompany }) => {
                 </Label>
               </FormGroup>
               <FormGroup>
-                <Label for="ubication">Ubication:</Label>
+                <Label for="ubication">Ubicación:</Label>
                 <PlacesAutocomplete
                   value={address}
                   onChange={handleChangeAddress}
@@ -196,20 +204,19 @@ const NewCompanyForm = ({ isOpen, toggleModalCompany }) => {
               </FormGroup>
               <FormGroup>
                 <Label>
-                  Images:
+                  Añade imágenes de la Agencia:
                   <Input type="file" multiple onChange={handleImageChange} />
                 </Label>
               </FormGroup>
             </ModalBody>
             <ModalFooter>
-              <Button type="submit">Create Company</Button>
+              <Button type="submit">Crear Agencia Turística</Button>
               <Button color="secondary" onClick={toggleModalCompany}>
-                Cancel
+                Cancelar
               </Button>
             </ModalFooter>
           </form>
         </Modal>
-        </>
       )}
     </>
   );

@@ -17,6 +17,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
+import Swal from "sweetalert2";
 
 class RegisterModal extends Component {
   state = {
@@ -110,7 +111,7 @@ class RegisterModal extends Component {
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include", // Para enviar cookies (si estás utilizando Devise con sesiones)
+      credentials: "include",
       body: JSON.stringify(data),
     })
       .then((response) => {
@@ -122,7 +123,17 @@ class RegisterModal extends Component {
       .then((result) => {
         console.log("Registro exitoso:", result);
 
-        // Realiza acciones adicionales después de un registro exitoso si es necesario
+        Swal.fire({
+          position: "center", // Use 'center' instead of 'top-end'
+          icon: "success",
+          title: "Registro exitoso",
+          showConfirmButton: false,
+          timer: 2000,
+          customClass: {
+            // Add a custom class for centering
+            popup: "center-alert-popup",
+          },
+        });
 
         // Cierra el modal después de registrar
         this.props.toggle();
